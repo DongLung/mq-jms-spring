@@ -6,17 +6,15 @@ package.
 The library contains:
 
 -   `mq-jms-spring-boot-starter` for [Spring Boot](https://projects.spring.io/spring-boot/) applications
--   `mq-jms-spring-testcontainer` for testing Spring Boot applications
+-   `mq-jms-spring-testcontainer` for integrating Spring with the `mq-java-testcontainer` module
 -   `mq-java-testcontainer` for integration with the [Testcontainers](https://testcontainers.org) project
 
 NOTE: Spring Boot 2 has now reached its end of non-commercial service life. So version 2.7.18 is the last update based
-on Spring 2. Further updates will follow the Spring 3 path only. If you want to continue to use Spring 2 with future
-versions of the MQ jars, then overriding the version inherited from the mq-jms-spring-boot in your parent pom.xml should
-be possible. However, this would not give easy access via configuration to any new features available in the MQ client.
+on Spring 2. Further updates will follow the Spring Boot 3 and 4 path only.
 
-NOTE: Spring Boot 4 is under development planned for release later in 2025. Early milestones are starting to appear.
-While this package does not currently have a formal release for Boot 4, the pieces are now in place to allow you do
-build against it: `RUNME.sh -b4` will create Boot4-compatible modules.
+If you want to continue to use Spring 2 with future versions of the MQ jars, then overriding the version inherited from
+the mq-jms-spring-boot in your parent pom.xml should be possible. However, this would not give easy access via
+configuration to any new features available in the MQ client.
 
 ## Installation and Usage
 
@@ -27,7 +25,8 @@ mechanism and has tasks that can push compiled jars to either a local repository
 Maven Central. When signing/authentication of modules is required, use the `gradle.properties.template` file as a
 starter for your own `gradle.properties`.
 
-Java 17 is required as the compiler level when building this package, as that is the baseline for Spring Boot 3.
+Java 17 is required as the minimum compiler level when building this package, as that is the baseline for Spring Boot 3.
+Later versions of the compiler can be used, with flags defining the compatibility levels.
 
 ### Spring Boot Applications
 
@@ -52,7 +51,7 @@ Maven:
 </dependency>
 ```
 
-**Note** This repository and the corresponding Maven Central artifacts requires Spring Boot 3. Maven
+**Note** This repository and the corresponding Maven Central artifacts requires Spring Boot 3 or 4. Maven
 Central continues to provide older versions that work with Spring Boot 2.
 
 ## Testcontainers
@@ -466,7 +465,7 @@ The preferred approach for using this package in other projects will be to use t
 
 ### License
 
-Copyright © 2018, 2025 IBM Corp. All rights reserved.
+Copyright © 2018, 2026 IBM Corp. All rights reserved.
 
 Licensed under the apache license, version 2.0 (the "license"); you may not use this file except in compliance with the
 license. You may obtain a copy of the license at

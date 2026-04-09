@@ -25,8 +25,6 @@ plugins {
     id 'jacoco'
 }
 
-ext.mockitoVersion = '5.21.0'
-
 dependencies {
   // Using "api" in this section means that the dependency ends up being listed
   // with scope=compile in the generated POM. So users of this package end up with

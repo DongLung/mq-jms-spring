@@ -30,8 +30,7 @@ Usage: RUNME.sh [-b bootVersion] [-c] [-k] [-n] [-p] [-r]
 Options:
    -b Spring Boot Version ("boot2", "boot3" or "boot4"): can be repeated to get combinations.
       Default builds boot3 only.
-   -c Build the Testcontainer module. Do not set this if building for Maven publication and
-      the version number has not changed.
+   -c Build the Testcontainer module. This is automatically set/cleared when doing a GA release.
    -k Keep artifacts built previously at a different version
    -n Do not sign the generated artifacts for local builds
    -p Check prereqs for local builds (always done for release builds)
@@ -66,7 +65,6 @@ bootVersions=""
 strProject="mq-jms-spring-boot-starter"
 cntProject="mq-jms-spring-testcontainer"
 cntBaseProject="mq-java-testcontainer"
-testContainerBuild=false
 
 timeStamp="/tmp/springBuild.time"
 buildLog="/tmp/springBuild.log"
@@ -90,6 +88,23 @@ cntOut4="$curdir/mq-boot4-spring-testcontainer"
 majors=""
 
 unset NOSIGN
+
+# Always use the system default, but we'll check its level. Currently
+# have to have between Java 17 and 21. Java 8 is too old; Java 25 doesn't
+# work with something - probably gradle. On Fedora, you can use
+# the "alternatives" command to manage the default versions of java/javac.
+# We'll expect that java/javac are at the same level but use javac to extract
+# the version, as the format of that seems more consistent across levels.
+# unset JAVA_HOME
+
+javaVer=`javac -version | awk '{print $2}' | cut -d. -f1`
+if [ "$javaVer" -lt 17 ] || [ "$javaVer" -gt 21 ]
+then
+  echo "System Java version needs to be between 17 and 21."
+  echo "You currently have:" `javac -version`
+  echo "May be able to use 'alternatives' to configure your machine."
+  exit 1
+fi
 
 touch $timeStamp
 # Git sometimes loses permissions
@@ -180,9 +195,32 @@ then
     find $HOME/.gradle | grep $p | xargs rm -rf
   done
 fi
-unset JAVA_HOME
+
 
 cd $curdir
+
+# Do we need to release a new version of the mq-java-testcontainer module? It does not
+# depend on Spring versions, and the underlying dependency changes at a much slower rate.
+if $gaRelease
+then
+  tcVer=`grep ext.tcVer build.gradle | awk '{print $3}' | sed "s/'//g" `
+  if [ ! -z "$tcVer" ]
+  then
+    echo "Checking if mq-java-testcontainer $tcVer is already published"
+    prereqCheck=true prereqCheck.sh com.ibm.mq mq-java-testcontainer "$tcVer" >/dev/null 2>&1
+    if [ $? -ne 0 ]
+    then
+      echo "mq-java-testcontainer $tcVer is not on Maven. It will be rebuilt here."
+      testContainerBuild=true
+    else
+      echo "mq-java-testcontainer $tcVer is already on Maven. Not rebuilding it."
+      testContainerBuild=false
+    fi
+  else
+    echo "ERROR: Cannot find testContainer version"
+    exit 1
+  fi
+fi
 
 for vers in $bootVersions
 do

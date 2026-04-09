@@ -21,6 +21,7 @@ package sample5.test;
 
 import static java.lang.Thread.sleep;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,11 @@ public class TestcontainersTest {
       sleep(500);
     }
     Assertions.assertEquals(Listener.lastMessage,testMessage);
+  }
+
+  @AfterAll
+  static void cleanup() {
+    System.out.println("Done.");
   }
 
   @TestComponent
