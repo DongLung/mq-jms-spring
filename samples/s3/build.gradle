@@ -28,6 +28,6 @@ repositories {
 }
 
 dependencies {
-  implementation(group:"com.ibm.mq", name:"mq-jms-spring-boot-starter", version:starterVersion)
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + starterVersion)
 }
 

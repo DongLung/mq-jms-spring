@@ -26,8 +26,7 @@ repositories {
 }
 
 dependencies {
-  implementation(group:"com.ibm.mq", name:"mq-jms-spring-boot-starter", version:starterVersion)
-  implementation(group:"dev.snowdrop", name:"narayana-spring-boot-starter", version:narayanaVersion)
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + starterVersion)
+  implementation("dev.snowdrop:narayana-spring-boot-starter:" + narayanaVersion)
 }
-
 

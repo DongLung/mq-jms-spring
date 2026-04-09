@@ -9,7 +9,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'org.springframework.boot' 
+apply plugin: 'org.springframework.boot'
 
 // The designated version should match the current version in the root of the repo
 ext.starterVersion = '3.5.13'
@@ -24,5 +24,5 @@ repositories {
 }
 
 dependencies {
-  implementation(group:"com.ibm.mq", name:"mq-jms-spring-boot-starter", version:starterVersion)  
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + starterVersion)
 }

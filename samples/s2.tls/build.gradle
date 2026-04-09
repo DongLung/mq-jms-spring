@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-  implementation(group:"com.ibm.mq", name:"mq-jms-spring-boot-starter", version:starterVersion)
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + starterVersion)
 }
 
 // Do not need these properties as they are now supplied via SslBundle attributes

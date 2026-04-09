@@ -23,11 +23,9 @@ repositories {
 }
 
 dependencies {
-  implementation(group:"com.ibm.mq", name:"mq-jms-spring-boot-starter",version: mqStarterVersion)
-  
-  testImplementation(group:"com.ibm.mq", name:"mq-jms-spring-testcontainer",version: mqStarterVersion)
-  testImplementation(group:"org.springframework.boot", name:"spring-boot-starter-test", version: springBootVersion)
-
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + mqStarterVersion)
+  testImplementation("com.ibm.mq:mq-jms-spring-testcontainer:" + mqStarterVersion)
+  testImplementation("org.springframework.boot:spring-boot-starter-test:" + springBootVersion)
 }
 
 configurations {

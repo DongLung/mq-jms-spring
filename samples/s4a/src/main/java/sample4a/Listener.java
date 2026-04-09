@@ -20,7 +20,7 @@ import jakarta.jms.TextMessage;
 @Component
 public class Listener {
   static final String ID = "S4A.Listener";
-  
+
   @JmsListener(destination = Application.qName, containerFactory = "qm1JmsListenerContainerFactory", id = ID)
   @Transactional(rollbackFor = RuntimeException.class)
   public void receiveMessage(Session session, TextMessage msg) throws JMSException, RuntimeException {
@@ -48,6 +48,16 @@ public class Listener {
       }
       else {
         System.out.println("Executing: Rollback");
+
+        try {
+          // Add a delay so we don't spin too many times on the message listener while waiting for things
+          // to cleanup and shut down.
+          Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+
+        }
+
         throw new RuntimeException("Doing XA rollback");
       }
     }

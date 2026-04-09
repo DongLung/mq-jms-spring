@@ -53,16 +53,16 @@ subprojects {
   group = mqGroup
   version = mqStarterVersion
 
-  // Spring no longer release early milestone/snapshot package to their own repository so we 
+  // Spring no longer release early milestone/snapshot package to their own repository so we
   // don't need to have them in here
   repositories {
     mavenLocal()
     mavenCentral()
   }
-  
+
   dependencies {
-    // Now live in the underlying project's build.gradle files 
-  }  
+    // Now live in the underlying project's build.gradle files
+  }
 
   // Include variable debug info in the compiled classes
   compileJava.options.debugOptions.debugLevel = "source,lines,vars"
@@ -79,7 +79,7 @@ subprojects {
   tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
   }
-  
+
   compileJava.dependsOn(processResources)
   compileJava {
     sourceCompatibility=javaSourceCompatibility
@@ -93,6 +93,12 @@ subprojects {
      }
   }
 */
+
+  tasks.named('assemble') {
+    dependsOn(sourcesJar)
+    dependsOn(javadocJar)
+  }
+
   task sourcesJar(type: Jar, dependsOn: ['mqPrereq',classes]) {
     archiveClassifier = 'sources'
     sourceSets.all {
@@ -131,10 +137,6 @@ subprojects {
     from javadoc.destinationDir
   }
 
-  artifacts {
-    archives sourcesJar, javadocJar
-  }
-
   // Load signing parameters from external properties
   // This will probably be a "gradle.properties" file in this directory
   ['signing.keyId', 'signing.password', 'signing.secretKeyRingFile']
@@ -165,10 +167,10 @@ subprojects {
             inceptionYear = '2018'
           } else {
             name = project.name
-            description = 'Testcontainers configuration for IBM MQ'  
+            description = 'Testcontainers configuration for IBM MQ'
             inceptionYear = '2025'
           }
-              
+
           packaging = 'jar'
           url = 'https://github.com/ibm-messaging/mq-jms-spring'
           licenses {
@@ -178,7 +180,7 @@ subprojects {
               distribution = 'repo'
             }
           }
-              
+
           scm {
             connection = 'scm:git:git://github.com/ibm-messaging/mq-jms-spring.git'
             developerConnection = 'scm:git:git@github.com/ibm-messaging/mq-jms-spring.git'
@@ -187,7 +189,7 @@ subprojects {
           properties = [
             'project.build.sourceEncoding': 'UTF-8'
           ]
-              
+
           developers {
             developer {
               name = 'IBM MQ'
@@ -199,7 +201,7 @@ subprojects {
         }
       }
     }
-    
+
     repositories {
       maven {
         def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots"

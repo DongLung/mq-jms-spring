@@ -24,7 +24,7 @@ buildscript {
 version = mqTCVer
 
 dependencies {
-  api group: 'org.testcontainers', name: 'testcontainers', version: tcVer
+  api 'org.testcontainers:testcontainers:' + tcVer
 }
 
 
