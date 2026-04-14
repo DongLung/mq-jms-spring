@@ -1,20 +1,19 @@
 
 buildscript {
+
+    ext.propsFile = new File(rootDir.getParent(), 'samples.properties')
+    apply from: propsFile
+
     repositories {
         mavenCentral()
     }
     dependencies {
-	 classpath("org.springframework.boot:spring-boot-gradle-plugin:3.5.13")
+	 classpath("org.springframework.boot:spring-boot-gradle-plugin:" + boot4Version)
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
-
-// The designated version should match the current version in the root of the repo
-ext.starterVersion = '3.5.13'
-ext.mqStarterVersion = starterVersion
-ext.springBootVersion = starterVersion
 
 // Look for a local copy of the dependencies as well as in Maven Central (if not already cached)
 repositories {
@@ -23,15 +22,13 @@ repositories {
 }
 
 dependencies {
-  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + mqStarterVersion)
-  testImplementation("com.ibm.mq:mq-jms-spring-testcontainer:" + mqStarterVersion)
-  testImplementation("org.springframework.boot:spring-boot-starter-test:" + springBootVersion)
-}
-
-configurations {
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + mqBoot4StarterVersion)
+  testImplementation("com.ibm.mq:mq-jms-spring-testcontainer:" + mqBoot4StarterVersion)
+  testImplementation("org.springframework.boot:spring-boot-starter-test:" + boot4Version) {
     // We seem to get two versions of the org.json classes. Since we're not doing anything with
     // android, exclude it to avoid any warning messages.
-    all*.exclude module: 'android-json'
+    exclude(module:'android-json')
+  }
 }
 
 test {

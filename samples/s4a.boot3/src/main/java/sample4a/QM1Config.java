@@ -26,12 +26,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 
+import com.atomikos.jms.AtomikosConnectionFactoryBean;
 import com.ibm.mq.jakarta.jms.MQXAConnectionFactory;
 import com.ibm.mq.spring.boot.MQConfigurationProperties;
 import com.ibm.mq.spring.boot.MQConnectionFactoryCustomizer;
 import com.ibm.mq.spring.boot.MQConnectionFactoryFactory;
-
-import com.atomikos.jms.AtomikosConnectionFactoryBean;
 
 import jakarta.jms.ConnectionFactory;
 
@@ -39,13 +38,13 @@ import jakarta.jms.ConnectionFactory;
  * This class allows us to build an MQ ConnectionFactory using the same properties and underlying construction
  * mechanisms as the default MQ Spring Boot module, but using a different configuration prefix. That allows us
  * to have multiple connections defined and managed within the same process and resource definitions.
- * 
+ *
  * Because we want to use two-phase XA transactions, we need to instantiate an XAConnectionFactory. In fact, because
  * we are using Atomikos as the coordinator, we can explicitly create an appropriate bean here. It then gets associated
- * with the JmsListener. 
- * 
+ * with the JmsListener.
+ *
  * A variation of this class with QM1 replaced by QM2 gives the beans for the second queue manager.
- *  
+ *
  * There are approaches to handling the configuration that could be made more generic (eg putting the definitions in a list)
  * but for this sample, explicitly having two classes is OK. It shows more about how it's working.
  */

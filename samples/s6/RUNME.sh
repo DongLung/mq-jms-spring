@@ -17,4 +17,4 @@ echo "CLEAR QLOCAL(DEV.QUEUE.1)" | runmqsc -e QM1 >/dev/null 2>&1
 # Now run the program. Build using the gradle wrapper in parent directory
 cd ../..
 
-./gradlew -p samples/s6.boot4 bootRun
+./gradlew -p samples/s6 bootRun
