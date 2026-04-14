@@ -1,0 +1,103 @@
+Reusing configuration cache.
+> Task :processResources UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :resolveMainClassName UP-TO-DATE
+
+> Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.5)
+
+2026-04-14T08:33:30.538+01:00  INFO 811324 --- [           main] sample8.Application                      : Starting Application using Java 21.0.10 with PID 811324 (/home/metaylor/GitHub/ibm-messaging/mq-jms-spring/samples.untracked/s8/build/classes/java/main started by metaylor in /home/metaylor/GitHub/ibm-messaging/mq-jms-spring/samples.untracked/s8)
+2026-04-14T08:33:30.541+01:00  INFO 811324 --- [           main] sample8.Application                      : No active profile set, falling back to 1 default profile: "default"
+2026-04-14T08:33:31.506+01:00  INFO 811324 --- [           main] sample8.Application                      : Started Application in 1.272 seconds (process running for 1.567)
+
+========================================
+MQ JMS Sample started. Message sent to queue: DEV.QUEUE.1
+========================================
+Time: 08.33.31 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 1
+Executing: Rollback
+Time: 08.33.32 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 1
+Executing: Rollback
+Time: 08.33.34 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 1
+Executing: Rollback
+Time: 08.33.38 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 1
+Executing: Rollback
+In Error Handler:
+  [1] Listener method 'public void sample8.Listener.receiveMessage(jakarta.jms.Session,jakarta.jms.TextMessage) throws jakarta.jms.JMSException,java.lang.RuntimeException' threw exception
+  [2] Doing rollback
+Time: 08.33.38 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 2
+Executing: Rollback
+Time: 08.33.39 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 2
+Executing: Rollback
+Time: 08.33.41 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 2
+Executing: Rollback
+Time: 08.33.45 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 2
+Executing: Rollback
+In Error Handler:
+  [1] Listener method 'public void sample8.Listener.receiveMessage(jakarta.jms.Session,jakarta.jms.TextMessage) throws jakarta.jms.JMSException,java.lang.RuntimeException' threw exception
+  [2] Doing rollback
+Time: 08.33.45 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 3
+Executing: Rollback
+Time: 08.33.46 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 3
+Executing: Rollback
+Time: 08.33.48 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 3
+Executing: Rollback
+Time: 08.33.52 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 3
+Executing: Rollback
+In Error Handler:
+  [1] Listener method 'public void sample8.Listener.receiveMessage(jakarta.jms.Session,jakarta.jms.TextMessage) throws jakarta.jms.JMSException,java.lang.RuntimeException' threw exception
+  [2] Doing rollback
+Time: 08.33.52 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 4
+Exiting because delivery count greater than 3
+Executing: Rollback
+Stopping listener: S1R.Listener
+Time: 08.33.53 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 4
+Exiting because delivery count greater than 3
+Executing: Rollback
+Time: 08.33.55 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 4
+Exiting because delivery count greater than 3
+Executing: Rollback
+Time: 08.33.59 Message: Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026 Backout: 4
+Exiting because delivery count greater than 3
+Executing: Rollback
+In Error Handler:
+  [1] Listener method 'public void sample8.Listener.receiveMessage(jakarta.jms.Session,jakarta.jms.TextMessage) throws jakarta.jms.JMSException,java.lang.RuntimeException' threw exception
+  [2] Doing rollback
+2026-04-14T08:33:59.652+01:00  WARN 811324 --- [(p945-L260120)]] o.s.j.l.SimpleMessageListenerContainer   : Rejecting received message because of the listener container having been stopped in the meantime: 
+  JMSMessage class: jms_text
+  JMSType:          null
+  JMSDeliveryMode:  2
+  JMSDeliveryDelay: 0
+  JMSDeliveryTime:  0
+  JMSExpiration:    0
+  JMSPriority:      4
+  JMSMessageID:     ID:414d5120514d31202020202020202020c357a5690285f546
+  JMSTimestamp:     1776152011538
+  JMSCorrelationID: null
+  JMSDestination:   queue:///DEV.QUEUE.1
+  JMSReplyTo:       null
+  JMSRedelivered:   true
+    JMSXAppID: sample8.Application         
+    JMSXDeliveryCount: 5
+    JMSXUserID: metaylor    
+    JMS_IBM_Character_Set: UTF-8
+    JMS_IBM_Encoding: 273
+    JMS_IBM_Format: MQSTR   
+    JMS_IBM_MsgType: 8
+    JMS_IBM_PutApplType: 28
+    JMS_IBM_PutDate: 20260414
+    JMS_IBM_PutTime: 07333154
+Hello from IBM MQ at Tue Apr 14 08:33:31 BST 2026
+Done.
+
+BUILD SUCCESSFUL in 30s
+4 actionable tasks: 1 executed, 3 up-to-date
+Configuration cache entry reused.

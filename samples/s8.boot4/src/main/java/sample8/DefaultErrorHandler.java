@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017, 2020 IBM Corp. All rights reserved.
+ * Copyright 2024 IBM Corp. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -12,5 +12,20 @@
  * and limitations under the License.
  */
 
+package sample8;
 
-rootProject.name = 'mq-jms-spring-sample6'
+import org.springframework.util.ErrorHandler;
+
+// This gets hooked into the Listener when there's an exception generated
+public class DefaultErrorHandler implements ErrorHandler {
+  @Override
+  public void handleError(Throwable t) {
+    int i=0;
+    Listener.errorHandlerCalled = true;
+    System.out.printf("In Error Handler:\n");
+    while (t != null) {
+      System.out.printf("  [%d] %s\n",++i,t.getMessage());
+      t = t.getCause();
+    }
+  }
+}

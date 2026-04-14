@@ -26,6 +26,7 @@ Older versions of the samples have been removed.
   in the _src/test/java_ directory.
 * s6.boot4 - Show how the new Spring Boot 4/Framework 7 JmsClient class can be used as an alternative to JmsTemplate
 * s7.boot4 - Shows how to retrieve CCDT and JWT from an https server to connect to IBM MQ. Also uses Boot 4
+* s8.boot4 - Shows how JMS Message Listeners can use the `@Retryable` capability in Spring Framework 7.
 
 
 ### Note: Atomikos samples
