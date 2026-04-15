@@ -20,8 +20,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.jms.JmsProperties;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
+import org.springframework.boot.jms.autoconfigure.JmsProperties;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +33,6 @@ import org.springframework.jms.annotation.JmsListener;
 /**
  * The default Spring configuration for a JMS Listener sets the receive timeout (a polling
  * loop timer) too low for a cost-effective solution with IBM MQ.
- * See <a href="https://developer.ibm.com/messaging/2018/02/09/mq-spring-tip">this article</a>
- * for more information.
  *
  * This class will override that default value if it is not explicitly set in the application
  * properties. The application still has control though. If the app sets the value
@@ -44,43 +42,44 @@ import org.springframework.jms.annotation.JmsListener;
  * This method is invoked early in the cycle, once the application environment has been loaded. We then
  * get the opportunity to inspect and add to the environment that will be used later on by the
  * JMS Listener initialisers.
- * 
+ *
  * This allows the MQ JMS listener to have a different effective default than other JMS providers.
- * 
+ *
  * Support for this property within Spring Boot itself was added in version 2.2.0
- * 
+ *
  */
 @ConditionalOnClass({ JmsProperties.Listener.class, JmsListener.class })
 @ConditionalOnMissingBean(JmsListener.class)
 @Configuration
 public class MQConfigurationListenerDefault implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-  
+
   private static Logger logger = LoggerFactory.getLogger(MQConfigurationListenerDefault.class);
-  
+
   @Autowired
   private final Long defaultReceiveTimeout = 30 * 1000L; // 30 seconds
-  
+
   // There are a number of formats for the property name supported by Spring.
   // This set includes the recommended variants.
   private static String lcPrefix = "spring.jms.listener.";
   private static String ucPrefix = "SPRING_JMS_LISTENER_";
   //@formatter:off
-  private final String timeoutProperties[] = { 
-      lcPrefix + "receiveTimeout",  
-      lcPrefix + "receivetimeout", 
+  private final String timeoutProperties[] = {
+      lcPrefix + "receiveTimeout",
+      lcPrefix + "receivetimeout",
       lcPrefix + "receive-timeout",
-      lcPrefix + "receive_timeout", 
-      lcPrefix + "RECEIVE_TIMEOUT", 
-      ucPrefix + "RECEIVE_TIMEOUT" 
-      };
+      lcPrefix + "receive_timeout",
+      lcPrefix + "RECEIVE_TIMEOUT",
+      ucPrefix + "RECEIVE_TIMEOUT"
+  };
   //@formatter:on
-  
 
+
+  @Override
   @Bean
   @Lazy(false)
   public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
     // Note: trace entries from this method are only emitted if the root logger is enabled as the
-    // MQ-specific logging gets turned on too late. 
+    // MQ-specific logging gets turned on too late.
     logger.trace("onApplicationEvent : {}", event.toString());
     try {
       String foundProperty = null;

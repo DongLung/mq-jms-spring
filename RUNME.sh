@@ -29,7 +29,7 @@ function printSyntax {
 Usage: RUNME.sh [-b bootVersion] [-c] [-k] [-n] [-p] [-r]
 Options:
    -b Spring Boot Version ("boot2", "boot3" or "boot4"): can be repeated to get combinations.
-      Default builds boot3 only.
+      Default builds boot4 only.
    -c Build the Testcontainer module. This is automatically set/cleared when doing a GA release.
    -k Keep artifacts built previously at a different version
    -n Do not sign the generated artifacts for local builds
@@ -90,17 +90,20 @@ majors=""
 unset NOSIGN
 
 # Always use the system default, but we'll check its level. Currently
-# have to have between Java 17 and 21. Java 8 is too old; Java 25 doesn't
-# work with something - probably gradle. On Fedora, you can use
+# have to have between Java 17 and 25. Java 8 is too old.
+# On Fedora, you can use
 # the "alternatives" command to manage the default versions of java/javac.
 # We'll expect that java/javac are at the same level but use javac to extract
 # the version, as the format of that seems more consistent across levels.
+
 # unset JAVA_HOME
 
+minJavaVersion=17
+maxJavaVersion=25
 javaVer=`javac -version | awk '{print $2}' | cut -d. -f1`
-if [ "$javaVer" -lt 17 ] || [ "$javaVer" -gt 21 ]
+if [ "$javaVer" -lt $minJavaVersion ] || [ "$javaVer" -gt $maxJavaVersion ]
 then
-  echo "System Java version needs to be between 17 and 21."
+  echo "System Java version needs to be between $minJavaVersion and $maxJavaVersion."
   echo "You currently have:" `javac -version`
   echo "May be able to use 'alternatives' to configure your machine."
   exit 1
@@ -163,7 +166,7 @@ if [ -z "$bootVersions" ]
 then
   # Still need one boot version for loop even if
   # it's not actually going to be built
-  bootVersions="boot3"
+  bootVersions="boot4"
   if $testContainerBuild
   then
     justTestContainerBuild=true

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Generate JMS2 (Boot2) source from the JMS3 (Boot3):
+# Generate JMS2 (Boot2) source from the JMS3 (Boot3/Boot4):
 #
 # This script creates a copy of the Boot Starter code which is functionally (almost) identical
 # but has the jakarta package names replaced by javax in most places.
 #
-# Note that from version 3.2.2, the JMS3 code cannot be simply replicated in this way. Classes
+# Note that from Spring Boot version 3.2.2, the JMS3 code cannot be simply replicated in this way. Classes
 # that are unique to Spring 3 are now being used. However, this script is being left in here for now
 # as an example; it should still be possible to convert the Spring 3 code to Spring 2, but additional
 # filtering/changes are required. There is a minimal mockup of the SslBundles interface included here
@@ -44,6 +44,8 @@ do
       sed "s/ibm.mq.javax/ibm.mq/g" |\
       sed "s/import org.springframework.boot.ssl.*;//g" |\
       sed "s/import org.springframework.boot.autoconfigure.service.*;//g" |\
+      sed "s/org.springframework.boot.jms.autoconfigure/org.springframework.boot.autoconfigure.jms/g" |\
+      sed "s/org.springframework.boot.transaction.jta.autoconfigure/org.springframework.boot.autoconfigure.transaction.jta/g" |\
       sed "s/import org.springframework.boot.autoconfigure.ssl.*;//g" |\
       sed "s/extends ConnectionDetails//g" |\
       awk ' BEGIN {p=1}

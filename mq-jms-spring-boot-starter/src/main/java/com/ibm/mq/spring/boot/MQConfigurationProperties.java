@@ -21,10 +21,10 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.jms.JmsPoolConnectionFactoryProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import org.springframework.boot.jms.autoconfigure.JmsPoolConnectionFactoryProperties;
 
 import com.ibm.mq.MQEnvironment;
 import com.ibm.msg.client.jakarta.wmq.WMQConstants;

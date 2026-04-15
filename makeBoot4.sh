@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Generate a Boot4-compatible source from the primary tree (JMS3/Boot3):
-#
+# Generate a Boot4-compatible source from the primary tree (JMS3/Boot4):
+# This is a straight copy as we don't need to modify the code at all.
+# Boot4 is currently the primary development level.
 
 curdir=`pwd`
 in="$1"
@@ -12,7 +13,7 @@ then
   echo "Usage: makeBoot4.sh inDir outDir"
   exit 1
 fi
-# echo "Copying files for Boot4 build from $in to $out"
+# echo "Copying files for Boot3 build from $in to $out"
 
 if [ ! -d $in ]
 then
@@ -23,17 +24,10 @@ fi
 mkdir $out >/dev/null 2>&1
 cd $in
 # Create the structure
-find . -type f |\
-   grep -v bin/ |\
-   cpio -upad $out
+find . -type f | cpio -upad $out
 # And recopy the Java files doing any modifications as we go
-find . -type f -name "*.java" |\
- grep -v bin/ |\
- while read f
+find . -type f -name "*.java" | while read f
 do
-   # Boot4 moved a bunch of imported classes
-   cat $f |\
-   sed "s/org.springframework.boot.autoconfigure.jms/org.springframework.boot.jms.autoconfigure/g" |\
-   sed "s/org.springframework.boot.autoconfigure.transaction.jta/org.springframework.boot.transaction.jta.autoconfigure/g" > $out/$f 
+   cp $f $out/$f
 done
 

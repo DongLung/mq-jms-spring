@@ -9,12 +9,16 @@ The library contains:
 -   `mq-jms-spring-testcontainer` for integrating Spring with the `mq-java-testcontainer` module
 -   `mq-java-testcontainer` for integration with the [Testcontainers](https://testcontainers.org) project
 
-NOTE: Spring Boot 2 has now reached its end of non-commercial service life. So version 2.7.18 is the last update based
-on Spring 2. Further updates will follow the Spring Boot 3 and 4 path only.
+NOTES:
+* Spring Boot 2 has now reached its end of non-commercial service life. So version 2.7.18 is the last update based
+on Spring 2.
+* Spring Boot 3 has now reached its end of non-commercial service life. So version 3.5.14 is the last update based
+on Spring 3.
+* Further updates will follow the Spring Boot 3 and 4 path only.
 
-If you want to continue to use Spring 2 with future versions of the MQ jars, then overriding the version inherited from
-the mq-jms-spring-boot in your parent pom.xml should be possible. However, this would not give easy access via
-configuration to any new features available in the MQ client.
+If you want to continue to use older versions of Spring Boot with future versions of the MQ jars, then overriding the
+version inherited from the mq-jms-spring-boot in your parent pom.xml should be possible. However, this would not give
+easy access via configuration to any new features available in the MQ client.
 
 ## Installation and Usage
 
@@ -38,7 +42,7 @@ Gradle:
     }
 
     dependencies {
-        compile group: 'com.ibm.mq', name: 'mq-jms-spring-boot-starter', version: 'x.y.z'
+        implementation('com.ibm.mq:mq-jms-spring-boot-starter:version: 'x.y.z')
     }
 
 Maven:
@@ -50,9 +54,6 @@ Maven:
   <version>x.y.x</version>
 </dependency>
 ```
-
-**Note** This repository and the corresponding Maven Central artifacts requires Spring Boot 3 or 4. Maven
-Central continues to provide older versions that work with Spring Boot 2.
 
 ## Testcontainers
 For testing Spring Boot applications, you may need to provision a queue manager as part of the process. This can be

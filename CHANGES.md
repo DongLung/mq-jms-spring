@@ -1,6 +1,17 @@
 # Changelog
 Newest updates are at the top of this file
 
+## 3.5.xx (2026-0X-XX)
+- Update Spring dependencies
+- Move primary source tree to default to use Boot4
+  - Boot3 now managed via the copy/filter/rename script
+- Allow building package with Java 25
+- Update gradle to V9
+  - build.gradle files handle deprecated triplet dependency format
+- Almost all samples moved to use Spring Boot 4 (and directories renamed)
+- New sample `s8` to show some basic use of @Retryable for Message Listeners
+- Final version for Boot 3
+
 ## 3.5.13 (2026-04-09)
 - Update Spring dependencies
 
