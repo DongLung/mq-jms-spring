@@ -32,18 +32,18 @@ import com.ibm.mq.spring.boot.MQConnectionFactoryFactory;
  * This class allows us to build an MQ ConnectionFactory using the same properties and underlying construction
  * mechanisms as the default MQ Spring Boot module, but using a different configuration prefix. That allows us
  * to have multiple connections defined and managed within the same process and resource definitions.
- * 
- * Because we want to use two-phase XA transactions, we need to instantiate an XAConnectionFactory. 
- * 
+ *
+ * Because we want to use two-phase XA transactions, we need to instantiate an XAConnectionFactory.
+ *
  * A copy of this class with QM1 replaced by QM2 gives the beans for the second queue manager.
- *  
+ *
  * There are approaches to handling the configuration that could be made more generic (eg putting the definitions in a list)
  * but for this sample, explicitly having two classes is OK. It shows more about how it's working.
  */
 
 @Configuration
 public class QM1Config {
-  
+
   @Bean
   @ConfigurationProperties("qm1")
   MQConfigurationProperties qm1ConfigProperties() {

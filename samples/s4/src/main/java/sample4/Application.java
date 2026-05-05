@@ -16,9 +16,9 @@
  * This application demonstrates two separate aspects of Spring processing
  * 1 - configuring multiple queue manager connections in the same application
  * 2 - using XA (two-phase) transactions to reliably move messages between two queue managers
- * 
+ *
  * For the XA coordination, we use Atomikos. Other coordinators are available.
- * 
+ *
  * This program starts by putting two messages to a queue. It then reads them back copying them
  * to the same-named queue on another queue manager. But the first copy is committed, while the second
  * copy is rolledback. So we should end up with one message on each queue manager, and a BackoutCount of 1
@@ -31,7 +31,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.XADataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -55,6 +58,8 @@ import jakarta.transaction.RollbackException;
 import jakarta.transaction.SystemException;
 
 @SpringBootApplication
+//Must explicitly exclude JDBC datasource classes otherwise Spring tries to configure them and give an error
+@EnableAutoConfiguration (exclude={XADataSourceAutoConfiguration.class, DataSourceAutoConfiguration.class})
 @EnableJms
 @EnableTransactionManagement
 @Transactional

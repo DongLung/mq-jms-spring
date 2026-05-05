@@ -30,10 +30,10 @@ echo "ROLLBACK Message for Spring $d" | amqsput DEV.QUEUE.1 QM1 >/dev/null 2>&1
 # Now run the program. Build using the gradle wrapper in parent directory
 cd ../..
 
-./gradlew -p samples/s4a.boot3 bootRun
+./gradlew -p samples/s4a bootRun
 
 # And optionally look to see what's on each the queues on each queue manager. Should have one message on each
-if false
+if true 
 then
 echo "Reading from QM1"
 amqsbcg DEV.QUEUE.1 QM1

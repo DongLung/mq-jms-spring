@@ -1,5 +1,6 @@
 
 buildscript {
+
     ext.propsFile = new File(rootDir.getParent(), 'samples.properties')
     apply from: propsFile
 
@@ -7,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-	 classpath("org.springframework.boot:spring-boot-gradle-plugin:" + boot3Version)
+	 classpath("org.springframework.boot:spring-boot-gradle-plugin:" + boot4Version)
     }
 }
 
@@ -26,9 +27,10 @@ repositories {
 
 // The Atomikos module is no longer provided with Spring. But we can still get it directly
 dependencies {
-  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + mqBoot3StarterVersion)
-  implementation("com.atomikos:transactions-spring-boot3-starter:6.0.0")
+  implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + mqBoot4StarterVersion)
+  implementation("com.atomikos:transactions-spring-boot4-starter:6.0.1") 
 }
+
 // Some atomikos features are controlled by -D Java properties. They can be
 // set here as the Spring Boot processing might be too late
 bootRun {

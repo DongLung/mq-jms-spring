@@ -16,9 +16,9 @@
  * This application demonstrates two separate aspects of Spring processing
  * 1 - configuring multiple queue manager connections in the same application
  * 2 - using XA (two-phase) transactions to reliably move messages between two queue managers
- * 
+ *
  * For the XA coordination, we use Atomikos. Other coordinators are available.
- * 
+ *
  * At the start of the program, there should be two messages on the input queue (see the
  * startup script). This program sets up a listener. It then get messages copying them
  * to the same-named queue on another queue manager. But the first copy is committed, while the second
@@ -31,7 +31,10 @@ package sample4a;
 import java.text.SimpleDateFormat;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.XADataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.JmsListenerEndpointRegistry;
@@ -51,6 +54,8 @@ import jakarta.jms.Session;
 @EnableJms
 @EnableTransactionManagement
 @Transactional
+//Must explicitly exclude JDBC datasource classes otherwise Spring tries to configure them and give an error
+@EnableAutoConfiguration (exclude={XADataSourceAutoConfiguration.class, DataSourceAutoConfiguration.class})
 public class Application {
 
   static final String qName = "DEV.QUEUE.1"; // A queue from the default MQ Developer container config

@@ -6,7 +6,7 @@ file with externally-configured properties that control how the connection is ma
 modify those properties to match your environment. The `README` in the root of this repository lists the available
 properties.
 
-All samples are now using JMS3/Jakarta forms of the Java classes and have been renamed to remove any "jms3" suffix.
+All samples use the JMS3/Jakarta forms of the Java classes and have been renamed to remove any "jms3" suffix.
 Older versions of the samples have been removed.
 
 Most samples are now based on Spring Boot 4. The "boot4" suffix to directory names has been removed, and the "boot3"
@@ -22,16 +22,15 @@ suffix added to the holdouts.
   how transactions can be controlled within a JMSListener.
 * s4.boot3 - Shows how to connect to multiple queue managers in the same application and using an XA transaction
   coordinator to reliably transfer messages between them
-* s4a/boot3 - A modified version of s4 using a JmsListener instead of a polling Receiver
+* s4a.boot3 - A modified version of s4 using a JmsListener instead of a polling Receiver
 * s4n - Functionally identical to s4, but using Narayana as an alternative transaction manager
 * s5 - A very simple (and not very interesting) application, but this also shows how to use the Testcontainer enablement
   in the _src/test/java_ directory.
 * s6 - Show how the new Spring Boot 4/Framework 7 JmsClient class can be used as an alternative to JmsTemplate
-* s7 - Shows how to retrieve CCDT and JWT from an https server to connect to IBM MQ. Also uses Boot 4
-* s8 - Shows how JMS Message Listeners can use the `@Retryable` capability in Spring Framework 7.
+* s7 - Shows how to retrieve CCDT and JWT from an https server to connect to IBM MQ.
 
 
-### Note: Atomikos samples
+### Note: Atomikos samples (s4 and s4a)
 The current version of Atomikos does not work with the latest Spring Boot 3, as it uses deprecated and now-removed
 functions in Spring. See [this issue](https://github.com/atomikos/transactions-essentials/issues/234) in the Atomikos
 repository for more details. However, that issue does contain a workround for the problem, which has now been applied to
