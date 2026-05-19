@@ -33,7 +33,7 @@ cd ../..
 ./gradlew -p samples/s4a bootRun
 
 # And optionally look to see what's on each the queues on each queue manager. Should have one message on each
-if true 
+if false
 then
 echo "Reading from QM1"
 amqsbcg DEV.QUEUE.1 QM1

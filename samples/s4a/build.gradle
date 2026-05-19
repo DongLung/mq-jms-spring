@@ -28,7 +28,7 @@ repositories {
 // The Atomikos module is no longer provided with Spring. But we can still get it directly
 dependencies {
   implementation("com.ibm.mq:mq-jms-spring-boot-starter:" + mqBoot4StarterVersion)
-  implementation("com.atomikos:transactions-spring-boot4-starter:6.0.1")
+  implementation("com.atomikos:transactions-spring-boot4-starter:" + atomikosVersion)
 }
 
 // Some atomikos features are controlled by -D Java properties. They can be
