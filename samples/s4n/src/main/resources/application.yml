@@ -12,11 +12,7 @@ qm2:
   connName: "localhost(1415)"
   #pool: 
   #  enabled: true
-  trace:
-    traceFile: "/tmp/jms/trace.log"
-    parameterTrace: true
-    status: ON
-    
+     
 qm1: 
   queueManager: "QM1"
   #channel:
@@ -25,6 +21,12 @@ qm1:
   connName: "localhost(1414)"
   #pool:
   #  enabled: true
+  # Tracing is process-wide (can't have separate files for each qmgr')
+  # and has to applied during the FIRST operations. So set it up in QM1, not QM2
+  trace:
+     traceFile: "/tmp/jms/trace.log"
+     parameterTrace: false
+     status: ON
 
 
 # Mostly properties controlling some timers
