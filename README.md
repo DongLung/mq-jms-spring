@@ -10,11 +10,11 @@ The library contains:
 -   `mq-java-testcontainer` for integration with the [Testcontainers](https://testcontainers.org) project
 
 NOTES:
-* Spring Boot 2 has now reached its end of non-commercial service life. So version 2.7.18 is the last update based
-on Spring 2.
-* Spring Boot 3 has now reached its end of non-commercial service life. So version 3.5.14 is the last update based
-on Spring 3.
-* Further updates will follow the Spring Boot 3 and 4 path only.
+* Spring Boot 2 has now reached its end of non-commercial service life. Version 2.7.18 is the last update based
+on Spring Boot 2.
+* Spring Boot 3 has now reached its end of non-commercial service life. Version 3.5.15 is the last update based
+on Spring Boot 3.
+* Further updates will follow the Spring Boot 4 path.
 
 If you want to continue to use older versions of Spring Boot with future versions of the MQ jars, then overriding the
 version inherited from the mq-jms-spring-boot in your parent pom.xml should be possible. However, this would not give

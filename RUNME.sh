@@ -100,6 +100,10 @@ unset NOSIGN
 
 minJavaVersion=17
 maxJavaVersion=25
+
+j=`which javac`
+echo "Using javac at" `readlink -f $j`
+
 javaVer=`javac -version | awk '{print $2}' | cut -d. -f1`
 if [ "$javaVer" -lt $minJavaVersion ] || [ "$javaVer" -gt $maxJavaVersion ]
 then

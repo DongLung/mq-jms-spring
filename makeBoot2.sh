@@ -37,7 +37,7 @@ find . -type f -name "*.java" | while read f
 do
    # Change various package names to replace jakarta with javax in most places.
    # But the original MQ package names have neither in there. The TestContainers packages
-   # also need to be
+   # also need to be removed.
    cat  $f |\
       grep -v "DeprecatedConfigurationProperty" |\
       sed "s/jakarta/javax/g" |\
