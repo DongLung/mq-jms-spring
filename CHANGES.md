@@ -1,6 +1,11 @@
 # Changelog
 Newest updates are at the top of this file
 
+## 4.1.0 (2026-06-16)
+- Update to MQ 10.0.0.0
+- Update Spring dependencies
+  - Boot 4 only
+
 ## 3.5.15 (2026-06-11)
 - Update Spring dependencies
 - Move primary source tree to default to use Boot4
